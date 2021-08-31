@@ -1,0 +1,13 @@
+.calendar__cont {
+    padding: 10px;
+    width: 100%;
+    padding-top: 1rem;
+}
+
+.calendar__cont .react-calendar {
+    border: none;
+    background: #f8f8f8;
+    box-shadow: 1px 1px 10px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-top: 1rem;
+}

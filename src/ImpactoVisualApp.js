@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { Header } from './ImpactoVisualApp/Header';
+import { Header } from './components/Header';
 import { store } from './store/store';
 import { AppRouter } from './router/AppRouter';
 

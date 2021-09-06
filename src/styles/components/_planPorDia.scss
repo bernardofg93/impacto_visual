@@ -1,13 +1,39 @@
-.calendar__cont {
-    padding: 10px;
-    width: 100%;
-    padding-top: 1rem;
+.title__time {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
 }
 
-.calendar__cont .react-calendar {
-    border: none;
-    background: #f8f8f8;
-    box-shadow: 1px 1px 10px 4px rgba(0, 0, 0, 0.1);
+.date__range-cont {
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+/* calendar & time picker */
+.calendar__cont {
+   display: grid;
+}
+
+@media screen and (min-width: 768px) {
+    .calendar__cont {
+        grid-template-columns: repeat(2, 1fr);
+    } 
+}
+
+.time__picker-cont {
+    display: flex;
+}
+
+.calendar__cont .time-range {
+    padding: 1rem;
+    margin: 0 auto;
     width: 100%;
-    margin-top: 1rem;
+}
+
+.calendar__cont .time-range label {
+    padding: 1rem;
 }

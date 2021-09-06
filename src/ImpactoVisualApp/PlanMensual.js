@@ -1,26 +1,20 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {Buttons} from '../components/Buttons';
 
 export const PlanMensual = () => {
     
-    const history = useHistory();
-
-    const handleClick = (path) => {
-        history.push(path)
-    }
-
     return (
         <>
             <div className="container__plan-mensual">
                 <p className="title">Plan mensual</p>
                 <p className="subtitle__plan-mensual">Selecciona tu paquete de preferencia.</p>
-                <div class="card w-100">
-                    <div class="card-body">
-                        <div class="row">
-                            <h5 class="card-title">PaqueTe Vean</h5>
+                <div className="card w-100">
+                    <div className="card-body">
+                        <div className="row">
+                            <h5 className="card-title">PaqueTe Vean</h5>
                             <span>$15,000</span>
                         </div>
-                        <p class="card-text">
+                        <p className="card-text">
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
                             nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
                             erat volutpat
@@ -28,26 +22,26 @@ export const PlanMensual = () => {
                     </div>
                 </div>
 
-                <div class="card w-100">
-                    <div class="card-body">
-                        <div class="row">
-                            <h5 class="card-title">PaqueTe Vean</h5>
+                <div className="card w-100">
+                    <div className="card-body">
+                        <div className="row">
+                            <h5 className="card-title">PaqueTe Vean</h5>
                             <span>$15,000</span>
                         </div>
-                        <p class="card-text">
+                        <p className="card-text">
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
                             nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
                             erat volutpat
                         </p>
                     </div>
                 </div>
-                <div class="card w-100">
-                    <div class="card-body">
-                        <div class="row">
-                            <h5 class="card-title">PaqueTe Vean</h5>
+                <div className="card w-100">
+                    <div className="card-body">
+                        <div className="row">
+                            <h5 className="card-title">PaqueTe Vean</h5>
                             <span>$15,000</span>
                         </div>
-                        <p class="card-text">
+                        <p className="card-text">
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
                             nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
                             erat volutpat
@@ -56,20 +50,12 @@ export const PlanMensual = () => {
                 </div>
             </div>
             <div className="cont__plan-men">
-                <div className="btns__plan-men">
-                    <button
-                        className="btn btn-primary btn-md"
-                        to="/contrato" renderAs={Link}
-                        onClick={() => handleClick("contrato")}   
-                    >
-                        Atrás
-                    </button>
-                    <button
-                        className="btn btn-md btn-next"
-                    >
-                        Siguiente
-                    </button>
-                </div>
+                <Buttons 
+                   firstLink="contrato"
+                   firstName="Atrás"
+                   secondLink="archivos"
+                   secondName="Siguiente" 
+                />
             </div>
         </>
     )

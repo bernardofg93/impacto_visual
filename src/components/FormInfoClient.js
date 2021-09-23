@@ -1,74 +1,71 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export const FormInfoClient = () => {
-
-    const [valInput, setValInput] = useState([{
-        'name': '',
-        'email': '',
-        'tel': '',
-        'camp': ''
-    }]);
-
-    const handleChangeInput = ({ target }) => {
-        setValInput({
-            ...valInput,
-            [target.name]: target.value 
-        })
+export const FormInfoClient = (
+    {
+        handleSubmit,
+        handleChangeInput
     }
-
-    const { name, email, tel, camp } = valInput;
+) => {
 
     return (
-
         <div>
-            <p className="title__form" >Introduce tu información</p>
-            <form>
+            <p
+                className="title__form"
+            >
+                Introduce tu información
+            </p>
+
+            <form
+                onChange={handleChangeInput}
+                onSubmit={handleSubmit}
+            >
                 <div className="form-group">
                     <label>Nombre completo</label>
                     <input
                         type="text"
-                        className="form-control form-control-sm"
-                        id="exampleInputEmail1"
-                        aria-describedby="emailHelp"
-                        onChange={handleChangeInput}
-                        value={name}
-                        name="name"
+                        className={`form-control form-control-sm`}
+                        name="nameClient"
                     />
-                    <small id="emailHelp" className="form-text text-muted"></small>
                 </div>
+
                 <div className="form-group">
                     <label>Correo electrónico</label>
                     <input
                         type="email"
-                        className="form-control form-control-sm"
-                        id="exampleInputPassword1"
-                        value={email}
+                        className={`form-control form-control-sm `}
                         name="email"
                     />
                 </div>
+
                 <div className="form-group">
                     <label>Teléfono</label>
                     <input
                         type="text"
-                        className="form-control form-control-sm"
-                        id="exampleInputPassword1"
-                        value={tel}
+                        className={`form-control form-control-sm`}
                         name="tel"
                     />
                 </div>
-
-                <hr />
 
                 <div className="form-group ">
                     <label>Nombre de campaña</label>
                     <input
                         type="text"
-                        className="form-control form-control-sm"
-                        value={camp}
+                        className={`form-control form-control-sm `}
                         name="camp"
                     />
                 </div>
+
+                <div className="form-group ">
+                    <input
+                        type="submit"
+                        className={`btn btn-primary btn-sm`}
+                        name="camp"
+                        value="Ingresar datos"
+                    />
+                </div>
+
             </form>
+            <hr />
         </div>
     )
 }

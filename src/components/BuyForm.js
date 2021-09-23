@@ -1,28 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export const BuyForm = () => {
 
-    return (
+    const [formValues, setValuesForm] = useState({
+        razonSocial: '',
+        email: '',
+        direccionFiscal: '',
+        tipoFactura: ''
+    });
 
+    const handleChangeValues = ({ target }) => {
+        setValuesForm({
+            [target.name]: target.value
+        })
+    }
+
+    return (
         <div className="buy__form">
-            <form>
+            <form
+                onChange={handleChangeValues}
+            >
                 <div className="form-group">
                     <label>Razón social</label>
                     <input
                         type="text"
                         className="form-control form-control-sm"
-                        id="exampleInputEmail1"
-                        aria-describedby="emailHelp"
-                        name="name"
+                        name="razonSocial"
                     />
-                    <small id="emailHelp" className="form-text text-muted"></small>
                 </div>
                 <div className="form-group">
                     <label>RFC</label>
                     <input
                         type="email"
                         className="form-control form-control-sm"
-                        id="exampleInputPassword1"
                         name="email"
                     />
                 </div>
@@ -31,8 +41,7 @@ export const BuyForm = () => {
                     <input
                         type="text"
                         className="form-control form-control-sm"
-                        id="exampleInputPassword1"
-                        name="tel"
+                        name="direccionFiscal"
                     />
                 </div>
 
@@ -41,7 +50,7 @@ export const BuyForm = () => {
                     <input
                         type="text"
                         className="form-control form-control-sm"
-                        name="camp"
+                        name="tipoFactura"
                     />
                 </div>
             </form>

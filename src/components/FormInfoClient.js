@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Notification } from './Notification';
 
 export const FormInfoClient = (
     {
         handleSubmit,
-        handleChangeInput
+        handleChangeInput,
+        variant,
+        textAlert,
+        show,
+        formValues,
+        isEdit
     }
 ) => {
+
+    console.log('====================================');
+    console.log(isEdit);
+    console.log('====================================');
+
+    const { nameClient, email, tel, camp } = formValues;
 
     return (
         <div>
@@ -14,6 +26,13 @@ export const FormInfoClient = (
             >
                 Introduce tu información
             </p>
+
+            <Notification
+                show={show}
+                variant={variant}
+                textAlert={textAlert}
+                value={nameClient}
+            />
 
             <form
                 onChange={handleChangeInput}
@@ -25,6 +44,7 @@ export const FormInfoClient = (
                         type="text"
                         className={`form-control form-control-sm`}
                         name="nameClient"
+                        value={nameClient}
                     />
                 </div>
 
@@ -34,6 +54,7 @@ export const FormInfoClient = (
                         type="email"
                         className={`form-control form-control-sm `}
                         name="email"
+                        value={email}
                     />
                 </div>
 
@@ -43,6 +64,7 @@ export const FormInfoClient = (
                         type="text"
                         className={`form-control form-control-sm`}
                         name="tel"
+                        value={tel}
                     />
                 </div>
 
@@ -52,6 +74,7 @@ export const FormInfoClient = (
                         type="text"
                         className={`form-control form-control-sm `}
                         name="camp"
+                        value={camp}
                     />
                 </div>
 
@@ -59,13 +82,13 @@ export const FormInfoClient = (
                     <input
                         type="submit"
                         className={`btn btn-primary btn-sm`}
-                        name="camp"
-                        value="Ingresar datos"
+                        value={ `${isEdit ? 'Editar datos' : 'Ingresar datos'}` }
                     />
                 </div>
 
             </form>
             <hr />
+
         </div>
     )
 }

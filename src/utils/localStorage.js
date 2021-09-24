@@ -1,14 +1,32 @@
-export const getStateLocalStorage = () => {
-    const dataStorage = localStorage.getItem('db');
+import { useEffect } from "react";
 
-    if(dataStorage){
+export const getStateLocalStorage = (key) => {
+    const dataStorage = localStorage.getItem(key);
+
+    if (dataStorage) {
         return JSON.parse(dataStorage);
-    }else {
+    } else {
         return [];
     }
 }
 
 export const setStateLocalStorage = (state) => {
     localStorage.setItem('db', JSON.stringify(state));
+}
+
+export const updateStateCheckStorage = (storage, value, bolean) => {
+
+    const stateUpItem = storage.map(val => {
+        if (val.id === value) {
+            return {
+                ...val,
+                state: bolean
+            }
+        }
+        return val;
+    })
+
+    localStorage.setItem('dbListScreen', JSON.stringify(stateUpItem));
+    
 }
 

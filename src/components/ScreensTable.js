@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { statusCheckTrue, statusCheckFalse } from '../actions/data';
+import { getStateLocalStorage, updateStateCheckStorage } from '../utils/localStorage';
+import { useLocalStorage } from '../utils/useLocalStorage';
 
 export const ScreensTable = () => {
 
-    const dispatch = useDispatch();
+    const [listScreen, setListScreen] = useLocalStorage("dbListScreen",
+        [
+            {
+                id: 1,
+                name: 'PantallaRio',
+                title: '1 hora',
+                service: '12 pm',
+                state: false,
+            },
+            {
+                id: 2,
+                name: 'PantallaDos',
+                title: '1 hora',
+                service: '12 pm',
+                state: false,
+            }
+        ]);
 
-    const { list } = useSelector(state => state.data);
+    //let {} = listScreen;
 
     const [stateCheck, setStateCheck] = useState([]);
 
@@ -17,17 +33,25 @@ export const ScreensTable = () => {
         //Estate del estado
         const newChecked = [...stateCheck];
         //Busca en el estorage si esta en true o en false 
-        const checkStorage = list.find(res => res.id === value);
+        const stateItem = listScreen.find(res => res.id === value);
         //Comprueba si esta 
-        if (checkStorage.state === true) {
+        if (stateItem.state === true) {
             newChecked.splice(currentIndex, 1);
-            dispatch(statusCheckFalse(value));
+            stateItem.state = false
+
+            let actualityStorage = getStateLocalStorage('dbListScreen');
+            updateStateCheckStorage(actualityStorage, value, false);
+
             setStateCheck(newChecked);
         } else {
+            stateItem.state = true;
             newChecked.push(value);
-            dispatch(statusCheckTrue(value));
+
+            let actualityStorage = getStateLocalStorage('dbListScreen');
+            updateStateCheckStorage(actualityStorage, value, true);
+
+            setStateCheck(newChecked);
         }
-        setStateCheck(newChecked);
     }
 
     return (
@@ -51,7 +75,7 @@ export const ScreensTable = () => {
                 <tbody>
 
                     {
-                        list.map((el, index) => (
+                        listScreen.map((el, index) => (
                             <tr key={index}>
                                 <td>
                                     <input

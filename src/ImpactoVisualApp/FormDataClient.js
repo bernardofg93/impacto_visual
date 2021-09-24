@@ -1,38 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScreensTable } from '../components/ScreensTable';
 import { FormInfoClient } from '../components/FormInfoClient';
 import { Buttons } from '../components/Buttons';
-import { useDispatch, useSelector } from 'react-redux';
-import { btnDisabled } from '../actions/ui';
+import { useLocalStorage } from '../utils/useLocalStorage';
 import { getStateLocalStorage } from '../utils/localStorage';
 
 export const FormDataClient = () => {
 
-    let objStoraje = getStateLocalStorage();
+    const [show, setShow] = useState(false);
+    const [variant, setVariant] = useState("");
+    const [textAlert, setTextAlert] = useState("");
+    const [storage, setStorage] = useLocalStorage("dataClient", "");
+    const [isEdit, setisEdit] = useState(false);
 
-    const { data } = objStoraje;
-
-    const { list } = data;
-
-    const editTask = list.map(val => {
-        return {
-            ...val
-        }
-    })
-
-    console.log(editTask);
-
-    let { disabled } = useSelector(state => state.btnDisabled);
-
-    const dispatch = useDispatch();
+    let dataClientDb = getStateLocalStorage('dataClient');
+    let data;
+    dataClientDb.forEach(element =>(data = element));
 
     const [formValues, setformValues] = useState({
-        nameClient: '',
-        email: '',
-        tel: '',
-        camp: ''
+        nameClient: isEdit ? data.nameClient : '',
+        email: isEdit ? data.email : '',
+        tel: isEdit ? data.tel : '',
+        camp: isEdit ? data.camp : ''
     });
 
+    useEffect(() => {
+        setTimeout(() => {
+            setShow(false)
+        }, 3800)
+    }, [show])
 
     const handleChangeInput = ({ target }) => {
         setformValues({
@@ -47,14 +43,21 @@ export const FormDataClient = () => {
         e.preventDefault();
 
         if (nameClient === '' && email === '' && tel === '' && camp === '') {
-            console.log('favor de llenar los datos');
+            setShow(true);
+            setVariant("danger");
+            setTextAlert("datos erroneos");
         } else {
-            dispatch(btnDisabled());
+            let arrayDb = [];
+
+            if (formValues) {
+                arrayDb.push(formValues);
+                setStorage(arrayDb);
+                setisEdit(true);
+            }
         }
     }
 
     return (
-
         <div className="data__contrat-cont">
             <div className="grid__contrat">
                 <div>
@@ -62,6 +65,10 @@ export const FormDataClient = () => {
                         handleSubmit={handleSubmit}
                         formValues={formValues}
                         handleChangeInput={handleChangeInput}
+                        textAlert={textAlert}
+                        variant={variant}
+                        show={show}
+                        isEdit={isEdit}
                     />
                     <ScreensTable />
                     <div>
@@ -76,7 +83,6 @@ export const FormDataClient = () => {
                         secondLink={'planMensual'}
                         firstName={'Por día'}
                         secondName={'Mensual'}
-                        stateBtn={disabled}
                     />
                     <div className="bx__btn-next">
                         <button
@@ -88,6 +94,5 @@ export const FormDataClient = () => {
                 </div>
             </div>
         </div>
-
     )
 }

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 
 export const getStateLocalStorage = (key) => {
     const dataStorage = localStorage.getItem(key);

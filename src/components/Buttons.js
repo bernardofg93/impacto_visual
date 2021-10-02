@@ -7,27 +7,23 @@ export const Buttons = (
         secondLink,
         firstName,
         secondName,
-        stateBtn
+        disabledBtn
     }) => {
 
-        
-    const disabledLink = (e) => {
-        e.preventDefault();
-    }
+    
 
     return (
         <div className="container__btns-info">
             <Link
-                className={`${ stateBtn  ? `btn btn-primary btn-sm disabled` : `btn btn-primary btn-sm`}`}
+                className={`${ disabledBtn  ? `btn btn-primary btn-sm disabled` : `btn btn-primary btn-sm`}`}
                 to={firstLink}
-                onClick={disabledLink}
             >
 
                 {firstName}
             </Link>
 
             <Link
-                className={ `${ stateBtn  ? `btn btn-primary btn-sm disabled` : `btn btn-primary btn-sm`}`}
+                className={ `${ disabledBtn  ? `btn btn-primary btn-sm disabled` : `btn btn-primary btn-sm`}`}
                 to={secondLink}
             >
                 {secondName}

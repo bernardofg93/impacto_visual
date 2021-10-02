@@ -7,28 +7,46 @@ import { getStateLocalStorage } from '../utils/localStorage';
 
 export const FormDataClient = () => {
 
+    // Se comprueba si existen datos en la storage si es verdadero 
+    // se habilita la la edicion de datos del formaulario
+    let boleanEdit;
+    const actualityStorage = getStateLocalStorage("dataClient")
+    if (actualityStorage.length === 0) {
+        boleanEdit = false
+    } else {
+        boleanEdit = true;
+    }
+    //Una vez comprabada la existencia de data en la bd 
+    //se evalua que el usuario halla ingresado los dos requeridos para
+    //poder continuar con el proeceso
+    const dataRequiredForm = getStateLocalStorage("dataClient");
+    const dataRequiredTable = getStateLocalStorage("dbListScreen");
+    const resTable = dataRequiredTable.find(data => data.state === true);
+
     const [show, setShow] = useState(false);
     const [variant, setVariant] = useState("");
     const [textAlert, setTextAlert] = useState("");
     const [storage, setStorage] = useLocalStorage("dataClient", "");
-    const [isEdit, setisEdit] = useState(false);
+    const [isEdit, setisEdit] = useState(boleanEdit);
+    const [reload, setReload] = useState(false);
 
-    let dataClientDb = getStateLocalStorage('dataClient');
+    const [disabledBtn, setdisabledBtn] = useState(false);
+    const [selectedCheck, setselectedCheck] = useState(false);
+    const [completeForm, setcompleteForm] = useState(false);
+
+    //Getting values of localstorage
+    //let dataClientDb = getStateLocalStorage('dataClient');
     let data;
-    dataClientDb.forEach(element =>(data = element));
-
+    if (storage) {
+        storage.forEach(element => (data = element));
+    }
+    
     const [formValues, setformValues] = useState({
         nameClient: isEdit ? data.nameClient : '',
         email: isEdit ? data.email : '',
         tel: isEdit ? data.tel : '',
         camp: isEdit ? data.camp : ''
     });
-
-    useEffect(() => {
-        setTimeout(() => {
-            setShow(false)
-        }, 3800)
-    }, [show])
 
     const handleChangeInput = ({ target }) => {
         setformValues({
@@ -38,6 +56,35 @@ export const FormDataClient = () => {
     }
 
     let { nameClient, email, tel, camp } = formValues;
+
+    useEffect(() => {
+
+        if (completeForm && selectedCheck) {
+            setReload(true);
+            setdisabledBtn(false);
+        }
+
+        if (dataRequiredForm && resTable) {
+            setReload(true);
+            setdisabledBtn(false)
+        }
+
+        if(!selectedCheck){
+            setReload(true);
+            setdisabledBtn(false)
+        }
+
+        if(!resTable) {
+
+        } setReload(true);
+        setdisabledBtn(false)
+
+
+        setTimeout(() => {
+            setShow(false)
+        }, 3800)
+    }, [dataRequiredForm, resTable, selectedCheck, completeForm, reload])
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,11 +96,24 @@ export const FormDataClient = () => {
         } else {
             let arrayDb = [];
 
-            if (formValues) {
+            if (isEdit) {
+                const upDateDb = storage.map(items => {
+                    return {
+                        ...items,
+                        nameClient: nameClient,
+                        email: email,
+                        tel: tel,
+                        camp: camp
+                    }
+                })
+                localStorage.setItem("dataClient", JSON.stringify(upDateDb));
+            } else {
                 arrayDb.push(formValues);
                 setStorage(arrayDb);
                 setisEdit(true);
+                setcompleteForm(true);
             }
+
         }
     }
 
@@ -69,8 +129,12 @@ export const FormDataClient = () => {
                         variant={variant}
                         show={show}
                         isEdit={isEdit}
+                        data={data}
+
                     />
-                    <ScreensTable />
+                    <ScreensTable
+                        selectedCheck={setselectedCheck}
+                    />
                     <div>
                         <p
                             className="title__form"
@@ -83,6 +147,7 @@ export const FormDataClient = () => {
                         secondLink={'planMensual'}
                         firstName={'Por día'}
                         secondName={'Mensual'}
+                        disabledBtn={disabledBtn}
                     />
                     <div className="bx__btn-next">
                         <button

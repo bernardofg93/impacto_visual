@@ -37,3 +37,19 @@
 .calendar__cont .time-range label {
     padding: 1rem;
 }
+
+/* calendar and day picker */
+.container__calendar {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+}
+
+.container__calendar li {
+    list-style: none;
+}
+
+.calendar {
+    width: 100%;
+    margin: 0 auto;
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { getStateLocalStorage, updateStateCheckStorage } from '../utils/localStorage';
 import { useLocalStorage } from '../utils/useLocalStorage';
 
-export const ScreensTable = () => {
+export const ScreensTable = ({ selectedCheck }) => {
 
     const [listScreen, setListScreen] = useLocalStorage("dbListScreen",
         [
@@ -21,8 +21,6 @@ export const ScreensTable = () => {
                 state: false,
             }
         ]);
-
-    //let {} = listScreen;
 
     const [stateCheck, setStateCheck] = useState([]);
 
@@ -43,6 +41,11 @@ export const ScreensTable = () => {
             updateStateCheckStorage(actualityStorage, value, false);
 
             setStateCheck(newChecked);
+
+            if (stateCheck.length === 0) {
+                selectedCheck(false);
+            }
+
         } else {
             stateItem.state = true;
             newChecked.push(value);
@@ -51,6 +54,7 @@ export const ScreensTable = () => {
             updateStateCheckStorage(actualityStorage, value, true);
 
             setStateCheck(newChecked);
+            selectedCheck(true);
         }
     }
 

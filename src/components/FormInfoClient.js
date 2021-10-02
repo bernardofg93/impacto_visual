@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Notification } from './Notification';
 
 export const FormInfoClient = (
@@ -9,13 +9,9 @@ export const FormInfoClient = (
         textAlert,
         show,
         formValues,
-        isEdit
+        isEdit,
     }
 ) => {
-
-    console.log('====================================');
-    console.log(isEdit);
-    console.log('====================================');
 
     const { nameClient, email, tel, camp } = formValues;
 
@@ -31,11 +27,9 @@ export const FormInfoClient = (
                 show={show}
                 variant={variant}
                 textAlert={textAlert}
-                value={nameClient}
             />
 
             <form
-                onChange={handleChangeInput}
                 onSubmit={handleSubmit}
             >
                 <div className="form-group">
@@ -45,6 +39,7 @@ export const FormInfoClient = (
                         className={`form-control form-control-sm`}
                         name="nameClient"
                         value={nameClient}
+                        onChange={handleChangeInput}
                     />
                 </div>
 
@@ -55,6 +50,7 @@ export const FormInfoClient = (
                         className={`form-control form-control-sm `}
                         name="email"
                         value={email}
+                        onChange={handleChangeInput}
                     />
                 </div>
 
@@ -65,6 +61,7 @@ export const FormInfoClient = (
                         className={`form-control form-control-sm`}
                         name="tel"
                         value={tel}
+                        onChange={handleChangeInput}
                     />
                 </div>
 
@@ -75,6 +72,7 @@ export const FormInfoClient = (
                         className={`form-control form-control-sm `}
                         name="camp"
                         value={camp}
+                        onChange={handleChangeInput}
                     />
                 </div>
 
@@ -82,7 +80,7 @@ export const FormInfoClient = (
                     <input
                         type="submit"
                         className={`btn btn-primary btn-sm`}
-                        value={ `${isEdit ? 'Editar datos' : 'Ingresar datos'}` }
+                        value={`${isEdit ? 'Editar datos' : 'Ingresar datos'}`}
                     />
                 </div>
 

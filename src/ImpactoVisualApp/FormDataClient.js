@@ -40,7 +40,7 @@ export const FormDataClient = () => {
     if (storage) {
         storage.forEach(element => (data = element));
     }
-    
+
     const [formValues, setformValues] = useState({
         nameClient: isEdit ? data.nameClient : '',
         email: isEdit ? data.email : '',
@@ -69,22 +69,20 @@ export const FormDataClient = () => {
             setdisabledBtn(false)
         }
 
-        if(!selectedCheck){
+        if (!selectedCheck) {
             setReload(true);
             setdisabledBtn(false)
         }
 
-        if(!resTable) {
+        if (!resTable) {
 
         } setReload(true);
         setdisabledBtn(false)
-
 
         setTimeout(() => {
             setShow(false)
         }, 3800)
     }, [dataRequiredForm, resTable, selectedCheck, completeForm, reload])
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -113,7 +111,6 @@ export const FormDataClient = () => {
                 setisEdit(true);
                 setcompleteForm(true);
             }
-
         }
     }
 

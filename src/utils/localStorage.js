@@ -13,9 +13,9 @@ export const setStateLocalStorage = (state) => {
     localStorage.setItem('db', JSON.stringify(state));
 }
 
-export const updateStateCheckStorage = (storage, value, bolean) => {
+export const updateStateCheckStorage = (storage, value, bolean, actualityStorage) => {
 
-    const stateUpItem = storage.map(val => {
+    const stateUpItem = actualityStorage.map(val => {
         if (val.id === value) {
             return {
                 ...val,
@@ -25,7 +25,7 @@ export const updateStateCheckStorage = (storage, value, bolean) => {
         return val;
     })
 
-    localStorage.setItem('dbListScreen', JSON.stringify(stateUpItem));
-    
+    localStorage.setItem(storage, JSON.stringify(stateUpItem));
+
 }
 

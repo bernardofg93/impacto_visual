@@ -13,6 +13,15 @@
 
 .container__plan-mensual .card {
     margin-top: 1rem;
+    cursor: pointer;
+}
+
+.select__item {
+    & .card-title {
+        color: #fff;
+    }
+    background-color: #265CFF;
+    color: #fff;
 }
 
 .container__plan-mensual .card .card-text {
@@ -51,3 +60,4 @@ z
 .cont__plan-men .btns__plan-men .btn {
     width: 30%;
 }
+

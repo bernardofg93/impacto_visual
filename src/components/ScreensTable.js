@@ -26,6 +26,7 @@ export const ScreensTable = ({ selectedCheck }) => {
 
     const isChecked = (value) => {
 
+        const storage = 'dbListScreen';
         //Valor del check seleccionado
         const currentIndex = stateCheck.indexOf(value);
         //Estate del estado
@@ -38,7 +39,7 @@ export const ScreensTable = ({ selectedCheck }) => {
             stateItem.state = false
 
             let actualityStorage = getStateLocalStorage('dbListScreen');
-            updateStateCheckStorage(actualityStorage, value, false);
+            updateStateCheckStorage(storage, value, false, actualityStorage);
 
             setStateCheck(newChecked);
 
@@ -51,7 +52,7 @@ export const ScreensTable = ({ selectedCheck }) => {
             newChecked.push(value);
 
             let actualityStorage = getStateLocalStorage('dbListScreen');
-            updateStateCheckStorage(actualityStorage, value, true);
+            updateStateCheckStorage(storage, value, true, actualityStorage);
 
             setStateCheck(newChecked);
             selectedCheck(true);
